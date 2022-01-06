@@ -13,6 +13,7 @@ export default function Login({setToken}){
     const navigate = useNavigate();
     const [botao, setBotao] = useState('Entrar')
     const [opacityValue, setOpacityValue] = useState('1');
+    const [pointerEvent, setPointerEvent] = useState('fill');
 
     function signIn(e){
         e.preventDefault();
@@ -24,16 +25,22 @@ export default function Login({setToken}){
 
         setBotao(<Loader type="ThreeDots" color="#FFFFFF" height={15} width={45}/>);
         setOpacityValue('0.7');
+        setPointerEvent('none');
 
         promise.then (response => {
             setBotao('entrar');
             setOpacityValue('1');
+            setPointerEvent('fill')
             setToken(response.data.token);
-            navigate('/Hoje');
+            navigate('/hoje');
         });
         promise.catch (error => {
             setBotao('Entrar');
             setOpacityValue('1');
+            setPointerEvent('fill')
+            setEmail('');
+            setPassword('');
+            alert('Credenciais incorretas')
         });
     }
 
@@ -42,7 +49,7 @@ export default function Login({setToken}){
             <img src= {logo} alt="logo" />
             <input placeholder='email' type="email" onChange={(e) => setEmail(e.target.value)} value={email} />
             <input placeholder='senha' type="password" onChange={(e) => setPassword(e.target.value)} value={password}/>
-            <Button opacity = {opacityValue}>{botao}</Button>
+            <Button pointer = {pointerEvent} opacity = {opacityValue}>{botao}</Button>
             <Link to={'/cadastro'}> Não tem uma conta? Cadastre-se!</Link>
         </Container>
     );
@@ -65,6 +72,8 @@ const Button = styled.button`
     display: flex;
     align-items: center;
     justify-content: center;
+
+    pointer-events: ${props => props.pointer};
 
     color: #FFFFFF;
 `;
