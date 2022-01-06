@@ -2,19 +2,23 @@
 // import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './components/Login';
-import Cadastro from './components/Cadastro';
+import Register from './components/ Register';
 import Habito from './components/Habito';
 import Hoje from './components/Hoje';
 import Historico from './components/Historico';
+import { useState } from 'react';
 
 export default function App(){
+
+  const [token,setToken] = useState('');
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />}></Route>
-        <Route path="/cadastro" element={<Cadastro/>}></Route>
-        <Route path="/habito" element={<Habito/>}></Route>
-        <Route path="/hoje" element={<Hoje/>}></Route>
+        <Route path="/" element={<Login setToken = {setToken} />}></Route>
+        <Route path="/cadastro" element={<Register />}></Route>
+        <Route path="/habito" element={<Habito token = {token} />}></Route>
+        <Route path="/hoje" element={<Hoje token = {token}/>}></Route>
         <Route path="/historico" element={<Historico/>}></Route>
       </Routes>
     </BrowserRouter>

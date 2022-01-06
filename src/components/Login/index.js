@@ -1,18 +1,70 @@
-import styled from 'styled-components';
 import logo from "../../assets/logo.png"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Container from '../Container';
+import styled from 'styled-components';
+import { useState } from 'react';
+import axios from 'axios';
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import Loader from "react-loader-spinner";
 
-export default function Login(){
+export default function Login({setToken}){
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const navigate = useNavigate();
+    const [botao, setBotao] = useState('Entrar')
+    const [opacityValue, setOpacityValue] = useState('1');
+
+    function signIn(e){
+        e.preventDefault();
+
+        const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login', {
+            email,
+            password
+        });
+
+        setBotao(<Loader type="ThreeDots" color="#FFFFFF" height={15} width={45}/>);
+        setOpacityValue('0.7');
+
+        promise.then (response => {
+            setBotao('entrar');
+            setOpacityValue('1');
+            setToken(response.data.token);
+            navigate('/Hoje');
+        });
+        promise.catch (error => {
+            setBotao('Entrar');
+            setOpacityValue('1');
+        });
+    }
+
     return(
-        <Container>
+        <Container onSubmit={signIn}>
             <img src= {logo} alt="logo" />
-            <input placeholder='email' type="text" />
-            <input placeholder='senha' type="text" />
-            <button>Entrar</button>
+            <input placeholder='email' type="email" onChange={(e) => setEmail(e.target.value)} value={email} />
+            <input placeholder='senha' type="password" onChange={(e) => setPassword(e.target.value)} value={password}/>
+            <Button opacity = {opacityValue}>{botao}</Button>
             <Link to={'/cadastro'}> Não tem uma conta? Cadastre-se!</Link>
         </Container>
     );
 }
 
+const Button = styled.button`
+    border: none;
+    background: #52B6FF;
+    border-radius: 4.63636px;
+    width: 303px;
+    height: 45px;
 
+    margin-top: 6px;
+
+    font-family: Lexend Deca;
+    font-size: 21px;
+    line-height: 26px;
+    opacity:${props => props.opacity};
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #FFFFFF;
+`;

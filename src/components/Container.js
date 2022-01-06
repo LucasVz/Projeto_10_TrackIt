@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Container = styled.div`
+const Container = styled.form`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -30,22 +30,6 @@ const Container = styled.div`
         width: 303px;
         height: 45px;
         margin-bottom: 6px;
-    }
-
-    button{
-        border: none;
-        background: #52B6FF;
-        border-radius: 4.63636px;
-        width: 303px;
-        height: 45px;
-
-        margin-top: 6px;
-
-        font-family: Lexend Deca;
-        font-size: 21px;
-        line-height: 26px;
-
-        color: #FFFFFF;
     }
 `;
 
