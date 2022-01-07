@@ -7,7 +7,7 @@ import axios from 'axios';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
 
-export default function Login({setToken}){
+export default function Login({setToken, setUser}){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
@@ -32,6 +32,7 @@ export default function Login({setToken}){
             setOpacityValue('1');
             setPointerEvent('fill')
             setToken(response.data.token);
+            setUser(response.data)
             navigate('/hoje');
         });
         promise.catch (error => {

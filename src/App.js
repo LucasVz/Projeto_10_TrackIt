@@ -11,14 +11,16 @@ import { useState } from 'react';
 export default function App(){
 
   const [token,setToken] = useState('');
+  const [user, setUser] = useState(null);
+
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login setToken = {setToken} />}></Route>
+        <Route path="/" element={<Login setUser = {setUser} setToken = {setToken} />}></Route>
         <Route path="/cadastro" element={<Register />}></Route>
-        <Route path="/habito" element={<Habito token = {token} />}></Route>
-        <Route path="/hoje" element={<Hoje token = {token}/>}></Route>
+        <Route path="/habito" element={<Habito user = {user} token = {token} />}></Route>
+        <Route path="/hoje" element={<Hoje user = {user} token = {token}/>}></Route>
         <Route path="/historico" element={<Historico/>}></Route>
       </Routes>
     </BrowserRouter>
