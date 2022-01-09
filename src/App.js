@@ -13,7 +13,6 @@ export default function App(){
   const [token,setToken] = useState('');
   const [user, setUser] = useState(null);
 
-
   return (
     <BrowserRouter>
       <Routes>

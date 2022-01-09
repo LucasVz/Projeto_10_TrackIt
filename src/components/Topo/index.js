@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 
 export default function Topo({user}){
-    console.log("aqui:" + user.image);
     return(
         <Top>
             <img className="logo" src={logo} alt="logo" />

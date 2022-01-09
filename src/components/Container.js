@@ -11,7 +11,6 @@ const Container = styled.form`
     }
 
     a{
-        font-family: Lexend Deca;
         font-size: 14px;
         line-height: 17px;
         text-decoration: underline;

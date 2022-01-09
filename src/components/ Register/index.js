@@ -71,7 +71,6 @@ const Button = styled.button`
 
     margin-top: 6px;
 
-    font-family: Lexend Deca;
     font-size: 21px;
     line-height: 26px;
     opacity:${props => props.opacity};

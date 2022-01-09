@@ -43,7 +43,6 @@ const Container = styled.div`
     padding: 0 36px;
 
     a{
-        font-family: Lexend Deca;
         font-size: 18px;
         line-height: 22px;
 
