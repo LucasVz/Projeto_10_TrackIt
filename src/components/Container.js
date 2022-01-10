@@ -29,6 +29,7 @@ const Container = styled.form`
         width: 303px;
         height: 45px;
         margin-bottom: 6px;
+        padding-left: 10px;
     }
 `;
 

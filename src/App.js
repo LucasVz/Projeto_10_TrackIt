@@ -3,10 +3,11 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './components/Login';
 import Register from './components/ Register';
-import Habito from './components/Habito';
-import Hoje from './components/Hoje';
-import Historico from './components/Historico';
+import Habit from './components/Habit';
+import Today from './components/Today';
+import History from './components/History';
 import { useState } from 'react';
+import UserContext from './context/UserContext'
 
 export default function App(){
 
@@ -14,14 +15,16 @@ export default function App(){
   const [user, setUser] = useState(null);
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Login setUser = {setUser} setToken = {setToken} />}></Route>
-        <Route path="/cadastro" element={<Register />}></Route>
-        <Route path="/habito" element={<Habito user = {user} token = {token} />}></Route>
-        <Route path="/hoje" element={<Hoje user = {user} token = {token}/>}></Route>
-        <Route path="/historico" element={<Historico/>}></Route>
-      </Routes>
-    </BrowserRouter>
+    <UserContext.Provider value={{ token, setToken, user, setUser }}>
+      <BrowserRouter>
+        <Routes>
+            <Route path="/" element={<Login />}></Route>
+            <Route path="/cadastro" element={<Register />}></Route>
+            <Route path="/habito" element={<Habit />}></Route>
+            <Route path="/hoje" element={<Today  />}></Route>
+            <Route path="/historico" element={<History />}></Route>
+        </Routes>
+      </BrowserRouter>
+    </UserContext.Provider>
   );
 }

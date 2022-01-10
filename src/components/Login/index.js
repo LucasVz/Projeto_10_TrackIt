@@ -6,12 +6,15 @@ import { useState } from 'react';
 import axios from 'axios';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
+import { useContext } from "react";
+import UserContext from '../../context/UserContext';
 
-export default function Login({setToken, setUser}){
+export default function Login(){
+    const { setToken, setUser} = useContext(UserContext);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
-    const [botao, setBotao] = useState('Entrar')
+    const [buttonEnter, setButtonEnter] = useState('Entrar')
     const [opacityValue, setOpacityValue] = useState('1');
     const [pointerEvent, setPointerEvent] = useState('fill');
 
@@ -23,12 +26,12 @@ export default function Login({setToken, setUser}){
             password
         });
 
-        setBotao(<Loader type="ThreeDots" color="#FFFFFF" height={15} width={45}/>);
+        setButtonEnter(<Loader type="ThreeDots" color="#FFFFFF" height={15} width={45}/>);
         setOpacityValue('0.7');
         setPointerEvent('none');
 
         promise.then (response => {
-            setBotao('entrar');
+            setButtonEnter('entrar');
             setOpacityValue('1');
             setPointerEvent('fill')
             setToken(response.data.token);
@@ -36,7 +39,7 @@ export default function Login({setToken, setUser}){
             navigate('/hoje');
         });
         promise.catch (error => {
-            setBotao('Entrar');
+            setButtonEnter('Entrar');
             setOpacityValue('1');
             setPointerEvent('fill')
             setEmail('');
@@ -50,7 +53,7 @@ export default function Login({setToken, setUser}){
             <img src= {logo} alt="logo" />
             <input placeholder='email' type="email" onChange={(e) => setEmail(e.target.value)} value={email} />
             <input placeholder='senha' type="password" onChange={(e) => setPassword(e.target.value)} value={password}/>
-            <Button pointer = {pointerEvent} opacity = {opacityValue}>{botao}</Button>
+            <Button pointer = {pointerEvent} opacity = {opacityValue}>{buttonEnter}</Button>
             <Link to={'/cadastro'}> Não tem uma conta? Cadastre-se!</Link>
         </Container>
     );

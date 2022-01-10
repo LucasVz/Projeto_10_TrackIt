@@ -13,7 +13,7 @@ export default function Register(){
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [image, setImage] = useState('');
-    const [botao, setBotao] = useState('Cadastrar')
+    const [buttonResister, setButtonResister] = useState('Cadastrar')
     const [opacityValue, setOpacityValue] = useState('1');
     const [pointerEvent, setPointerEvent] = useState('fill');
     const navigate = useNavigate();
@@ -21,7 +21,7 @@ export default function Register(){
     function signUp(e){
         e.preventDefault();
 
-        setBotao(<Loader type="ThreeDots" color="#FFFFFF" height={15} width={45}/>);
+        setButtonResister(<Loader type="ThreeDots" color="#FFFFFF" height={15} width={45}/>);
         setOpacityValue('0.7');
         setPointerEvent('none');
 
@@ -32,13 +32,13 @@ export default function Register(){
             password
         });
         promise.then (response => {
-            setBotao('Cadastrar');
+            setButtonResister('Cadastrar');
             setOpacityValue('1');
             setPointerEvent('fill')
             navigate('/')
         });
         promise.catch (error => {
-            setBotao('Cadastrar');
+            setButtonResister('Cadastrar');
             setOpacityValue('1');
             setPointerEvent('fill')
             setEmail('');
@@ -56,7 +56,7 @@ export default function Register(){
             <input placeholder='senha' type="password" onChange={(e) => setPassword(e.target.value)} value={password}/>
             <input placeholder='nome' type="text" onChange={(e) => setName(e.target.value)} value={name}/>
             <input placeholder='foto' type="text" onChange={(e) => setImage(e.target.value)} value={image}/>
-            <Button  pointer = {pointerEvent} opacity = {opacityValue}>{botao}</Button>
+            <Button  pointer = {pointerEvent} opacity = {opacityValue}>{buttonResister}</Button>
             <Link to={'/'}> Já tem uma conta? Faça login!</Link>
         </Container>
     );
