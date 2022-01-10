@@ -4,17 +4,13 @@ import { useState } from 'react';
 import button from "../../assets/Vector.png"
 import { useContext } from "react";
 import UserContext from '../../context/UserContext'
-import { useNavigate } from "react-router-dom";
 
-export default function CompleteHabits({id, name, done, currentSequence, highestSequence}){
-    const { token } = useContext(UserContext);
+
+export default function CompleteHabits({setAtivar, id, name, done, currentSequence, highestSequence}){
+    const { token, setPercent } = useContext(UserContext);
     const [checkHabit, setCheckHabit] = useState('')
     const [ifDone, setIfDone] = useState(done)
     const [checkColor, setCheckColor] = useState("#EBEBEB")
-    const [attCurrentSequence, setAttCurrentSequence] = useState(currentSequence)
-    const [attHighestSequence, setAttHighestSequence] = useState(highestSequence)
-    const navigate = useNavigate();
-        
     if(checkHabit !== '' && ifDone === false){
     const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${checkHabit}/check`,{},
         { 
@@ -34,8 +30,7 @@ export default function CompleteHabits({id, name, done, currentSequence, highest
     setCheckHabit('')
     setIfDone(true)
     setCheckColor("#8FC549")
-    setAttCurrentSequence(attCurrentSequence + 1)
-    setAttHighestSequence(attHighestSequence + 1)
+    setAtivar("ativar");
     }
     if(checkHabit !== '' && ifDone === true){
         const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${checkHabit}/uncheck`,{},
@@ -56,22 +51,21 @@ export default function CompleteHabits({id, name, done, currentSequence, highest
     setCheckHabit('')
     setIfDone(false)
     setCheckColor("#EBEBEB")
-    setAttCurrentSequence(attCurrentSequence - 1)
-    setAttHighestSequence(attHighestSequence - 1)
+    setAtivar("atualiza");
     }
     
     function CheckHAbit(){
         setCheckHabit(id);
         console.log(ifDone);
         console.log(checkHabit);
-        navigate('/hoje');
+        setAtivar("ativa");
     }
     return(
     <HabitCard>
         <div>
             <p className='title-card'>{name}</p>
-            <p className='sequence'>Sequência atual: <Spam style={(ifDone === true) ? {color:"#8FC549"}:{color:"#666666"}}>{attCurrentSequence} dias</Spam></p>
-            <p className='sequence'>Seu recorde: <Spam style={(currentSequence === highestSequence) ? {color:"#8FC549"}:{color:"#666666"}}>{attHighestSequence} dias</Spam></p>
+            <p className='sequence'>Sequência atual: <Spam style={(ifDone === true) ? {color:"#8FC549"}:{color:"#666666"}}>{currentSequence} dias</Spam></p>
+            <p className='sequence'>Seu recorde: <Spam style={(currentSequence === highestSequence) ? {color:"#8FC549"}:{color:"#666666"}}>{highestSequence} dias</Spam></p>
         </div>
         <Button onClick={CheckHAbit} onLoad={()=>(done === true)? setCheckColor("#8FC549"):setCheckColor("#EBEBEB")} check = {checkColor}><img src={button} alt='button'/></Button>
     </HabitCard>

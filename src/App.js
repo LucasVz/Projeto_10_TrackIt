@@ -13,9 +13,10 @@ export default function App(){
 
   const [token,setToken] = useState('');
   const [user, setUser] = useState(null);
+  const [percent, setPercent] = useState(0);
 
   return (
-    <UserContext.Provider value={{ token, setToken, user, setUser }}>
+    <UserContext.Provider value={{ percent, setPercent, token, setToken, user, setUser }}>
       <BrowserRouter>
         <Routes>
             <Route path="/" element={<Login />}></Route>

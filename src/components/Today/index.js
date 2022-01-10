@@ -10,17 +10,17 @@ import { useContext } from "react";
 import UserContext from '../../context/UserContext'
 
 export default function Today(){
-    const { token, user } = useContext(UserContext);
+    const { token, user, percent, setPercent } = useContext(UserContext);
     const [habit, setHabit] = useState(null);
-    let cont = 0
-    let result = 0;
+    const [ativar, setAtivar] = useState('');
+    let cont = 0;
     function teste(){
         for(let i = 0; i < habit.length; i++){
             if(habit[i].done === true){
                 cont++
             }
         }
-        result = cont/(habit.length)*100;
+        setPercent(Math.floor(cont/(habit.length)*100));
     }
     useEffect(() => {
         const promise = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today',{
@@ -30,7 +30,7 @@ export default function Today(){
         });
         promise.then(response => setHabit(response.data));
         promise.catch(error => console.log(error.response));
-    }, [token]);
+    }, [ativar]);
 
     if (habit === null) {
         return <h1>Carregando...</h1>
@@ -40,17 +40,16 @@ export default function Today(){
         <>
         <Top user = {user}/>
         <Container>
-                <Data>{dayjs().locale('pt').format('dddd, MM/DD')}</Data>
-                <p className="habit-states">{result}% dos habitos concluidos</p>
-                {habit.map( habits => (
-                    <CompleteHabits {...habits} token = {token} />
-                ))}
-        </Container>
+            <Data>{dayjs().locale('pt').format('dddd, MM/DD')}</Data>
+            <p className={`${(percent !== 0) && "text-green"} habit-states`}>{(percent !== 0)?`${percent}% dos habitos concluidos`:"Nenhum hábito concluído ainda"}</p>
+            {habit.map( habits => (
+                <CompleteHabits {...habits} setAtivar = {setAtivar} habit = {habit} setHabit = {setHabit} />
+            ))}
+        </Container >
         <Menu />
         </>
     );
 }
-
 
 const Data = styled.div`
     font-size: 23px;
@@ -68,5 +67,8 @@ const Container = styled.div`
         color: #BABABA;
 
         margin-bottom: 28px;
+    }
+    .text-green{
+        color: #8FC549;
     }
 `
