@@ -15,7 +15,7 @@ Track-it é um aplicativo para cadastrar e controlar seus hábitos no decorrer d
 
 O Track-it foi criado com o objetivo de ajudar a criar uma rotina semanal de hábitos acompanhando o progresso de forma fácil.
 
-A fonção Historico ainda será implementada.
+A função Historico ainda será implementada.
 
 ## Tecnologias
 
@@ -27,3 +27,14 @@ As seguintes ferramentas e frameworks foram usados na construção do projeto:
   <img style='margin: 5px;' src="https://img.shields.io/badge/react-app%20-%2320232a.svg?&style=for-the-badge&color=60ddf9&logo=react&logoColor=%2361DAFB"/>
   <img style='margin: 5px;' src="https://img.shields.io/badge/react_route%20-%2320232a.svg?&style=for-the-badge&logo=react&logoColor=%2361DAFB"/>
 </p>
+
+## Como rodar
+
+1. Clone esse repositorio
+2. Instale as dependencias
+```bash
+npm i
+```
+3. npm run start
+
+
