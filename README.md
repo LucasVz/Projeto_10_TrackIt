@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Track-it
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+É um aplicatico para acompanhar seus hábitos no dia a dia.
 
 ## Available Scripts
 
