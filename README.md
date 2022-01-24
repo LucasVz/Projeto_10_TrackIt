@@ -35,6 +35,10 @@ As seguintes ferramentas e frameworks foram usados na construção do projeto:
 ```bash
 npm i
 ```
-3. npm run start
+3. Inicie o aplicativo com
+```bash
+npm run start
+```
+
 
 
