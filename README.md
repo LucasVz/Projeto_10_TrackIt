@@ -2,6 +2,8 @@
 
 É um aplicatico para acompanhar seus hábitos no dia a dia.
 
+<img src="/src/assets/track-it-usage.gif" />
+
 ## Available Scripts
 
 In the project directory, you can run:
