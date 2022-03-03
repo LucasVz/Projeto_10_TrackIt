@@ -1,13 +1,14 @@
 # Track-it
 
-um aplicatico para acompanhar seus hábitos no dia a dia.
+Um aplicatico para acompanhar seus hábitos no dia a dia.
 
 <img src="/src/assets/track-it-usage.gif" />
 
 ## Sobre
 
-Track-it é um aplicativo para cadastrar e controlar seus hábitos no decorrer da semana ele contem as seguintes funções:
+Track-it é um aplicativo para cadastrar e controlar seus hábitos no decorrer da semana
 
+contem as seguintes funções:
 - Cadastro
 - Login
 - Cadastrar hábitos
@@ -39,6 +40,6 @@ npm i
 ```bash
 npm run start
 ```
-
+4. Acesse no seu navegador http://localhost:3000/
 
 
